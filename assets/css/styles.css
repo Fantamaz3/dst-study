@@ -453,13 +453,52 @@ hr {
 /* Accordion */
 
 .accordion__item {
+    margin-bottom: 10px;
     border: 1px solid #d3d3d3;
 }
 
+.accordion__item.active
+.accordion__content {
+    display: block;
+}
+
+.accordion__item.active
 .accordion__header {
-    padding: 15px 20px 15px 60px;
+    border-color: #d3d3d3;
+}
+
+.accordion__item.active
+.accordion__header:after {
+    transform: translateY(-50%)
+    rotate(-45deg);
+    margin-top: 5px;
+}
+
+
+.accordion__header {
+    padding: 15px 20px 15px 65px;
     position: relative;
-    border-bottom: 1px solid #d3d3d3;
+
+    border-bottom: 1px solid transparent;
+    cursor: pointer;
+}
+
+.accordion__header:after {
+    content: "";
+    display: block;
+    width: 16px;
+    height: 16px;
+
+    border-top: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    z-index: 1;
+
+    transform: translateY(-50%)
+    rotate(135deg);
 }
 
 .accordion__icon {
@@ -468,13 +507,16 @@ hr {
     filter: invert(100%) sepia(84%) saturate(368%) hue-rotate(133deg) brightness(105%) contrast(103%);
 
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 20px;
     z-index: 1;
+
+    transform: translateY(-50%);
 }
 
 .accordion__content {
     padding: 15px 20px;
+    display: none;
 
     font-size: 15px;
     color: #999;
@@ -484,7 +526,7 @@ hr {
 
 .accordion__title {
     font-size: 14px;
-    color: #333;
+    color: #d8d8d8;
     text-transform: uppercase;
 }
 
