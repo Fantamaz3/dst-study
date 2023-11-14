@@ -105,6 +105,24 @@ margin: 0 ;
     z-index: 1000;
 }
 
+.header.fixed {
+    padding: 10px 0;
+
+    background-color: #353038;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .5);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    transform: translate3d(0, 0, 0);
+}
+
+.header.active {
+    background-color: #353038;
+}
+
 .header__inner {
     display: flex;
     justify-content: space-between;
@@ -164,6 +182,83 @@ margin: 0 ;
 
 .nav__link.active {
     color: #fdcb9c;
+}
+
+/* Nav-toggle */
+.nav-toggle {
+    width: 30px;
+    padding: 10px 0;
+    display: none;
+
+    font-size: 0;
+    color: transparent;
+
+    border: 0;
+    background: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    z-index: 1;
+}
+
+.nav-toggle:focus {
+    outline: 0;
+
+}
+
+.nav-toggle__item {
+    display: block;
+    width: 100%;
+    height: 3px;
+
+    background-color: #fff;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+
+    transition: background .1s linear;
+}
+
+.nav-toggle.active .nav-toggle__item {
+    background: none;
+}
+
+.nav-toggle__item:before, 
+.nav-toggle__item:after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    transition: transform .2s linear;
+
+    background-color: #fff;
+
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.nav-toggle__item:before {
+    top: -8px;
+}
+
+.nav-toggle__item:after {
+    bottom: -8px;
+}
+
+.nav-toggle.active .nav-toggle__item:before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.nav-toggle.active .nav-toggle__item:after {
+    bottom: 0;
+    transform: rotate(-45deg);
 }
 
 /* Button */
@@ -619,11 +714,16 @@ margin: 0 ;
     position: relative;
 }
 
+.reviews .slick-slider {
+    padding: 0 110px;
+}
+
 .section--reviews {
-    padding: 0 0 110px;
+    padding: 0 0 80px;
 }
 
 .reviews__item {
+    min-height: 210px;
     padding-left: 205px;
     position: relative;
 }
@@ -670,6 +770,7 @@ margin: 0 ;
     color: #fff;
 }
 
+
 .reviews__author:before {
     content: "";
     display: inline-block;
@@ -677,14 +778,19 @@ margin: 0 ;
     width: 60px;
     height: 3px;
     margin-right: 10px;
-
-
+    
+    
     background-color: #f38181;
 }
 
-.reviews__btn {
+.slick-arrow {
+    display: block;
     font-size: 0;
     color: transparent;
+    cursor: pointer;
+
+    border: 0;
+    background: none;
 
     position: absolute;
     top: 50%;
@@ -692,7 +798,7 @@ margin: 0 ;
     transform: translateY(-50%);
 }
 
-.reviews__btn:after {
+.slick-arrow:after {
     content: "";
     display: block;
     width: 16px;
@@ -700,10 +806,9 @@ margin: 0 ;
 
     border-top: 2px solid #ccc;
     border-left: 2px solid #ccc;
-
 }
 
-.reviews__btn--prev {
+.slick-prev {
     left: 0;
     transform: rotate(-45deg);
 
@@ -712,7 +817,7 @@ margin: 0 ;
     padding: 10px;
 }
 
-.reviews__btn--next {
+.slick-next {
     right: 0;
     transform: rotate(135deg);
     
@@ -1308,7 +1413,7 @@ margin: 0 ;
     }
 
     /* Reviews */
-    .reviews {
+    .reviews .slick-slider {
         padding: 0 80px;
     }
 
@@ -1373,14 +1478,40 @@ margin: 0 ;
 
 @media (max-width: 770px) {
 
+    /* Header */
+    .header {
+        padding: 10px 0;
+    }
+
     /* Intro */
     .intro {
-        min-width: 650px;
+        min-width: 320px;
     }
 
     /* Nav */
     .nav {
         display: none;
+        width: 100%;
+
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        background-color: #353038;
+    }
+
+    .nav.active {
+        display: block;
+    }
+
+    .nav__link {
+        display: block;
+        margin: 0;
+        padding: 5px 20px;
+    }
+    
+    .nav-toggle {
+        display: block;
     }
 
     /* Section */
@@ -1415,7 +1546,7 @@ margin: 0 ;
     .slider__item.active:before {
         width: 50%;
     }
-
+    
     /* Services */
     .services {
         justify-content: center;
@@ -1457,6 +1588,7 @@ margin: 0 ;
     .reviews__author {
         font-size: 20px;
         float: right;
+        padding-right: 3px;
     }
 
     /* Works */
@@ -1548,15 +1680,17 @@ margin: 0 ;
     }
 
     /* Reviews */
+    
     .reviews {
-        padding: 0;
+        padding: 0 0;
+    }
+    
+    .reviews .slick-slider {
+        padding: 0 0;
     }
 
-    .reviews__btn {
-        top: 25%;
-    }
-
-    .reviews__btn--avatar {
+    .reviews__btn--avatar,
+    .slick-arrow  {
         top: 17%;
     }
 
